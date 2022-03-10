@@ -1,32 +1,29 @@
 package org.generation.blogpessoallg.seguranca;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.generation.blogpessoallg.model.UsuarioModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-//Clica no userDetails para invocar os métodos dele
 public class UserDetailsImpl implements UserDetails {
+	private static final long serialVersionUID = 1L;
 
-	public static final long serialVersionUID = 1L;
-	
 	private String userName;
 	private String password;
-	
-	//Construtor para pegar o usuario e senha
-	public UserDetailsImpl(UsuarioModel user) {
-		this.userName = user.getUsuario();
-		this.password = user.getSenha();
+	private List<GrantedAuthority> authorities;
+
+	public UserDetailsImpl(UsuarioModel usuario) {
+		this.userName = usuario.getUsuario();
+		this.password = usuario.getSenha();
 	}
-	
-	public UserDetailsImpl() {
-		
-	}
-	
+
+	public UserDetailsImpl() {	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		return authorities;
 	}
 
 	@Override
@@ -36,6 +33,7 @@ public class UserDetailsImpl implements UserDetails {
 
 	@Override
 	public String getUsername() {
+
 		return userName;
 	}
 
@@ -48,15 +46,14 @@ public class UserDetailsImpl implements UserDetails {
 	public boolean isAccountNonLocked() {
 		return true;
 	}
-
+	
 	@Override
-	public boolean isCredentialsNonExpired() {		
+	public boolean isCredentialsNonExpired() {
 		return true;
 	}
 
 	@Override
-	public boolean isEnabled() {	
+	public boolean isEnabled() {
 		return true;
 	}
-
 }

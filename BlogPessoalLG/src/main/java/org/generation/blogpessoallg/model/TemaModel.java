@@ -10,57 +10,53 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name ="tb_temas")
-public class TemaModel {	
-	
+@Table(name = "tb_temas")
+public class TemaModel {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotBlank
-	@Size(min = 2, max = 100)
-	private String categoria;
-	
-	
+	private long id;
+
+	@NotBlank(message = "O atributo Descrição é obrigatório e não pode conter espaços em branco")
+	private String descricao;
+
 	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("tema")
 	private List<PostagemModel> postagem;
 
-
-	public Long getId() {
+	public TemaModel(Long id, String descricao) {
+		this.id = id;
+		this.descricao = descricao;
+	}
+	
+	public TemaModel() { }
+	
+	public long getId() {
 		return id;
 	}
 
-
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-
-	public String getCategoria() {
-		return categoria;
+	public String getDescricao() {
+		return descricao;
 	}
 
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
-
 
 	public List<PostagemModel> getPostagem() {
 		return postagem;
 	}
 
-
 	public void setPostagem(List<PostagemModel> postagem) {
 		this.postagem = postagem;
 	}
 
-
-	
 }
