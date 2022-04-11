@@ -1,6 +1,7 @@
 package org.generation.blogpessoallg.model;
 
-import java.time.LocalDate;
+
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -32,8 +33,8 @@ public class PostagemModel {
 	@Size(min = 10, max = 1000, message = "O atributo texto deve ter no mínimo 10 e no máximo 1000 caracteres")
 	private String texto;
 
-	@UpdateTimestamp
-	private LocalDate data;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date data = new java.sql.Date(System.currentTimeMillis());
 
 	@ManyToOne
 	@JsonIgnoreProperties("postagem")
@@ -67,19 +68,19 @@ public class PostagemModel {
 		this.texto = texto;
 	}
 
-	public LocalDate getData() {
+	public Date getData() {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 
-	public TemaModel getTemaModel() {
+	public TemaModel getTema() {
 		return tema;
 	}
 
-	public void setTemaModel(TemaModel tema) {
+	public void setTema(TemaModel tema) {
 		this.tema = tema;
 	}
 
@@ -90,5 +91,7 @@ public class PostagemModel {
 	public void setUsuario(UsuarioModel usuario) {
 		this.usuario = usuario;
 	}
+
+	
 
 }

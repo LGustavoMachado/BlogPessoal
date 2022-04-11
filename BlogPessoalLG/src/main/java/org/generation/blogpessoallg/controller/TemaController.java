@@ -34,7 +34,7 @@ public class TemaController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<TemaModel> getById(@PathVariable long id) {
+	public ResponseEntity<TemaModel> getById(@PathVariable Long id) {
 		return temaRepository.findById(id)
 			.map(resposta -> ResponseEntity.ok(resposta))
 			.orElse(ResponseEntity.notFound().build());
@@ -46,30 +46,22 @@ public class TemaController {
 	}
 
 	@PostMapping
-	public ResponseEntity<TemaModel> postTema(@Valid @RequestBody TemaModel tema) {
+	public ResponseEntity<TemaModel> post(@Valid @RequestBody TemaModel tema) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(temaRepository.save(tema));
 	}
 
 	@PutMapping
-	public ResponseEntity<TemaModel> putTema(@Valid @RequestBody TemaModel tema) {
+	public ResponseEntity<TemaModel> put(@Valid @RequestBody TemaModel tema) {
 					
-		return temaRepository.findById(tema.getId())
-				.map(resposta -> {
-					return ResponseEntity.ok().body(temaRepository.save(tema));
-				})
-				.orElse(ResponseEntity.notFound().build());
+		return ResponseEntity.ok(temaRepository.save(tema));
+				
 
 	}
 
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deletePostagem(@PathVariable long id) {
+	public void delete(@PathVariable Long id) {
+		temaRepository.deleteById(id);
 		
-		return temaRepository.findById(id)
-				.map(resposta -> {
-					temaRepository.deleteById(id);
-					return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-				})
-				.orElse(ResponseEntity.notFound().build());
 	}
 
 }

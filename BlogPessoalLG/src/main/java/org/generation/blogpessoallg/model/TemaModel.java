@@ -19,12 +19,12 @@ public class TemaModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	@NotBlank(message = "O atributo Descrição é obrigatório e não pode conter espaços em branco")
 	private String descricao;
 
-	@OneToMany(mappedBy = "tema", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "tema", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("tema")
 	private List<PostagemModel> postagem;
 
@@ -33,13 +33,13 @@ public class TemaModel {
 		this.descricao = descricao;
 	}
 	
-	public TemaModel() { }
-	
-	public long getId() {
+	public TemaModel() {}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -58,5 +58,7 @@ public class TemaModel {
 	public void setPostagem(List<PostagemModel> postagem) {
 		this.postagem = postagem;
 	}
+	
+	
 
 }

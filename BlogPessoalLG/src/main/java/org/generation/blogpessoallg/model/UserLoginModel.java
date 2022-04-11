@@ -1,7 +1,5 @@
 package org.generation.blogpessoallg.model;
 
-
-
 public class UserLoginModel {
 
 	private Long id;
@@ -15,6 +13,8 @@ public class UserLoginModel {
 	private String foto;
 	
 	private String token;
+	
+	private String tipo;
 
 	public Long getId() {
 		return id;
@@ -36,14 +36,6 @@ public class UserLoginModel {
 		return usuario;
 	}
 
-	public String getToken() {
-		return token;
-	}
-
-	public void setToken(String token) {
-		this.token = token;
-	}
-
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
@@ -63,5 +55,23 @@ public class UserLoginModel {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	
 	
 }
